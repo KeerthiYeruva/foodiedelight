@@ -25,30 +25,32 @@ const AdminDashboard: React.FC = () => {
 
       <SearchBar onSearch={handleSearch} />
 
-      {isAddingRestaurant ? (
-        <RestaurantForm onSubmit={() => setIsAddingRestaurant(false)} />
-      ) : (
-        <button
-          onClick={() => setIsAddingRestaurant(true)}
-          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Add New Restaurant
-        </button>
-      )}
+      <div className="flex space-x-4">
+        {isAddingRestaurant ? (
+          <RestaurantForm onSubmit={() => setIsAddingRestaurant(false)} />
+        ) : (
+          <button
+            onClick={() => setIsAddingRestaurant(true)}
+            className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
+          >
+            Add New Restaurant
+          </button>
+        )}
 
-      {isAddingMenuItem ? (
-        <MenuItemForm
-          onSubmit={handleMenuItemSubmit}
-          onCancel={() => setIsAddingMenuItem(false)}
-        />
-      ) : (
-        <button
-          onClick={() => setIsAddingMenuItem(true)}
-          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Add New Menu Item
-        </button>
-      )}
+        {isAddingMenuItem ? (
+          <MenuItemForm
+            onSubmit={handleMenuItemSubmit}
+            onCancel={() => setIsAddingMenuItem(false)}
+          />
+        ) : (
+          <button
+            onClick={() => setIsAddingMenuItem(true)}
+            className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
+          >
+            Add New Menu Item
+          </button>
+        )}
+      </div>
 
       <RestaurantList searchTerm={searchTerm} />
     </div>

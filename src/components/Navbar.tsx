@@ -2,26 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => (
-  <nav className="bg-blue-600 p-4 shadow-md">
+  <nav className="bg-gradient-to-r from-blue-500 to-blue-700 p-4 shadow-lg">
     <div className="container mx-auto flex justify-between items-center flex-wrap">
-      <Link to="/" className="text-white text-xl font-bold">
-        FOODIEDELIGHT
+      <Link to="/" className="text-white text-2xl font-bold">
+        FOODIE DELIGHT
       </Link>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
-          <Link
-            to="/add"
-            className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
-          >
-            Add Restaurant
-          </Link>
-          <Link
-            to="/menu"
-            className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white"
-          >
-            Manage Menu
-          </Link>
-        </div>
+      <div className="flex space-x-4">
+        <Link
+          to="/add"
+          className="bg-white text-blue-700 font-semibold py-2 px-4 rounded hover:bg-blue-600 hover:text-white transition"
+        >
+          Add Restaurant
+        </Link>
+        <Link
+          to="/menu"
+          className="bg-white text-blue-700 font-semibold py-2 px-4 rounded hover:bg-blue-600 hover:text-white transition"
+        >
+          Manage Menu
+        </Link>
       </div>
     </div>
   </nav>
