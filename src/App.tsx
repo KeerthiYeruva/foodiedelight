@@ -1,22 +1,24 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// src/App.tsx
 
-import Home from "./pages/Home";
-import AddRestaurant from "./pages/AddRestaurant";
-import EditRestaurant from "./pages/EditRestaurant";
+import React from "react";
+import AdminDashboard from "./pages/AdminDashboard";
+import { RestaurantProvider } from "./context/RestaurantContext";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Navbar from "./components/Navbar";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/add" element={<AddRestaurant />} />
-        <Route path="/edit/:id" element={<EditRestaurant />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <RestaurantProvider>
+        <ErrorBoundary>
+          <Navbar />
+          <div className="container mx-auto p-4 max-w-6xl">
+            <AdminDashboard />
+          </div>
+        </ErrorBoundary>
+      </RestaurantProvider>
+    </div>
   );
-}
+};
 
 export default App;

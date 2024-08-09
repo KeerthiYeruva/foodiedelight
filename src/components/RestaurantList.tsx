@@ -1,62 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { getRestaurants, deleteRestaurant, Restaurant } from "../services/api";
-import { Link } from "react-router-dom";
+// src/components/RestaurantList.tsx
+
+import React from "react";
+import { useRestaurants } from "../context/RestaurantContext";
 
 const RestaurantList: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const data = await getRestaurants();
-        setRestaurants(data);
-      } catch (error) {
-        console.error("Failed to fetch restaurants", error);
-      }
-    };
-
-    fetchRestaurants();
-  }, []);
-
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteRestaurant(id);
-      setRestaurants(restaurants.filter((restaurant) => restaurant.id !== id));
-    } catch (error) {
-      console.error("Failed to delete restaurant", error);
-    }
-  };
+  const { restaurants, deleteRestaurant } = useRestaurants();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {restaurants.map((restaurant) => (
-        <div key={restaurant.id} className="bg-white p-4 rounded shadow-md">
-          <div className="flex justify-between items-center mb-2">
-            <Link
-              to={`/restaurants/${restaurant.id}`}
-              className="text-lg font-semibold text-blue-600"
-            >
-              {restaurant.name}
-            </Link>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Restaurant List</h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {restaurants.map((restaurant) => (
+          <li
+            key={restaurant.id}
+            className="p-4 bg-white rounded shadow-md flex justify-between items-center"
+          >
             <div>
-              <Link
-                to={`/edit/${restaurant.id}`}
-                className="text-blue-500 mr-2"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => handleDelete(restaurant.id)}
-                className="text-red-500"
-              >
-                Delete
-              </button>
+              <h3 className="text-xl font-semibold">{restaurant.name}</h3>
+              <p className="text-sm text-gray-600">{restaurant.description}</p>
+              <p className="text-sm text-gray-600">{restaurant.location}</p>
             </div>
-          </div>
-          <p className="text-gray-600">{restaurant.description}</p>
-          <p className="text-gray-500 text-sm">{restaurant.location}</p>
-        </div>
-      ))}
+            <button
+              onClick={() => deleteRestaurant(restaurant.id)}
+              className="bg-red-600 text-white p-2 rounded hover:bg-red-700"
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
