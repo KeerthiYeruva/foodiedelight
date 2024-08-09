@@ -116,7 +116,9 @@ The build artifacts will be stored in the \`build/\` directory. You can serve th
 
 
 ### Menu Item Management
-![Menu Management](https://github.com/user-attachments/assets/005e88e7-c478-429d-baef-669e7e5263a7)
+
+![Menu Management](https://github.com/user-attachments/assets/c92c5124-dd3b-4f65-a18e-025c4e631689)
+
 
 
 ## Time Breakdown
