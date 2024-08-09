@@ -2,6 +2,12 @@
 
 FOODIEDELIGHT is a food delivery application where restaurant admins can manage restaurants and their menus. This project is focused on the frontend, which includes functionalities such as adding, modifying, deleting, and listing restaurants.
 
+## Deployed Application
+
+The application is live and can be accessed at:
+
+[FOODIEDELIGHT](https://foodiedelight-nu.vercel.app/)
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
