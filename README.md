@@ -107,19 +107,17 @@ The build artifacts will be stored in the \`build/\` directory. You can serve th
 
 ### Admin Dashboard
 
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](](https://github.com/user-attachments/assets/66dc8945-8a8e-48e3-93e9-a1b056aa2e4c)
+
 
 ### Add Restaurant Form
 
-![Add Restaurant](screenshots/add-restaurant.png)
+![Add Restaurant](https://github.com/user-attachments/assets/b057b2e7-e3aa-405f-a0b5-fcd1c47e8078)
 
-### Restaurant List
-
-![Restaurant List](screenshots/restaurant-list.png)
 
 ### Menu Item Management
+![Menu Management](https://github.com/user-attachments/assets/005e88e7-c478-429d-baef-669e7e5263a7)
 
-![Menu Management](screenshots/menu-management.png)
 
 ## Time Breakdown
 
