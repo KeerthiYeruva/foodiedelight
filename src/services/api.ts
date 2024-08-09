@@ -9,9 +9,13 @@ export interface Restaurant {
   location: string;
 }
 
-export const getRestaurants = async (): Promise<Restaurant[]> => {
-  const response = await axios.get<Restaurant[]>(`${API_BASE_URL}/restaurants`);
-  return response.data;
+export const getRestaurants = async (
+  page: number = 1,
+  limit: number = 10
+): Promise<Restaurant[]> => {
+  const response = await fetch(`/api/restaurants?page=${page}&limit=${limit}`);
+  const data = await response.json();
+  return data;
 };
 
 export const getRestaurant = async (id: number): Promise<Restaurant> => {
