@@ -1,5 +1,3 @@
-// src/App.tsx
-
 import React from "react";
 import AdminDashboard from "./pages/AdminDashboard";
 import { RestaurantProvider } from "./context/RestaurantContext";

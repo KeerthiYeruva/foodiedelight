@@ -1,5 +1,3 @@
-// src/components/RestaurantForm.tsx
-
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,6 +11,12 @@ const RestaurantForm: React.FC<{
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { addRestaurant, updateRestaurant } = useRestaurants();
+  const [image, setImage] = useState<File | null>(null);
+  const [categories, setCategories] = useState<string[]>(
+    existingRestaurant?.categories || []
+  );
+
+  const availableCategories = ["Italian", "Chinese", "Mexican", "Seafood"];
 
   const formik = useFormik({
     initialValues: {
@@ -27,9 +31,14 @@ const RestaurantForm: React.FC<{
     }),
     onSubmit: async (values) => {
       setIsSubmitting(true);
+
       const restaurant = {
         id: existingRestaurant?.id || 0,
         ...values,
+        image: image
+          ? URL.createObjectURL(image)
+          : existingRestaurant?.image || "",
+        categories,
         menuItems: existingRestaurant?.menuItems || [],
       };
 
@@ -50,6 +59,21 @@ const RestaurantForm: React.FC<{
       setTimeout(() => setSuccessMessage(null), 3000);
     },
   });
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setImage(file);
+    }
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCategories = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setCategories(selectedCategories);
+  };
 
   return (
     <form
@@ -120,6 +144,42 @@ const RestaurantForm: React.FC<{
             {formik.errors.location}
           </div>
         ) : null}
+      </div>
+
+      <div>
+        <label
+          htmlFor="image"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Image:
+        </label>
+        <input
+          type="file"
+          onChange={handleImageChange}
+          accept="image/*"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="categories"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Categories:
+        </label>
+        <select
+          multiple
+          value={categories}
+          onChange={handleCategoryChange}
+          className="mt-1 block w-full p-2 border border-gray-300 rounded"
+        >
+          {availableCategories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
       {isSubmitting && <div className="text-blue-600">Loading...</div>}

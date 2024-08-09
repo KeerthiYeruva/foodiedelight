@@ -1,5 +1,3 @@
-// src/services/restaurantApi.ts
-
 import { Restaurant, mockRestaurants } from "./mockData";
 
 let restaurants: Restaurant[] = [...mockRestaurants];

@@ -1,10 +1,10 @@
-// src/services/mockData.ts
-
 export interface Restaurant {
   id: number;
   name: string;
   description: string;
   location: string;
+  image: string;
+  categories: string[];
   menuItems: MenuItem[];
 }
 
@@ -21,6 +21,8 @@ export const mockRestaurants: Restaurant[] = [
     name: "Ocean's Delight",
     description: "Seafood and more",
     location: "123 Ocean Avenue",
+    image: "https://example.com/ocean.jpg",
+    categories: ["Seafood"],
     menuItems: [
       {
         id: 1,
@@ -41,6 +43,8 @@ export const mockRestaurants: Restaurant[] = [
     name: "Mountain Retreat",
     description: "Hearty mountain meals",
     location: "456 Mountain Road",
+    image: "https://example.com/mountain.jpg",
+    categories: ["Hearty", "Mountain"],
     menuItems: [
       {
         id: 3,

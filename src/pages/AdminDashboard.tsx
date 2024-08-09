@@ -1,23 +1,29 @@
-// src/pages/AdminDashboard.tsx
-
 import React, { useState } from "react";
 import RestaurantList from "../components/RestaurantList";
 import RestaurantForm from "../components/RestaurantForm";
 import MenuItemForm from "../components/MenuItemForm";
 import { MenuItem } from "../services/mockData";
+import SearchBar from "../components/SearchBar";
 
 const AdminDashboard: React.FC = () => {
   const [isAddingRestaurant, setIsAddingRestaurant] = useState(false);
   const [isAddingMenuItem, setIsAddingMenuItem] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleMenuItemSubmit = (menuItem: MenuItem) => {
     console.log("Menu Item Submitted:", menuItem);
     setIsAddingMenuItem(false);
   };
 
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+
+      <SearchBar onSearch={handleSearch} />
 
       {isAddingRestaurant ? (
         <RestaurantForm onSubmit={() => setIsAddingRestaurant(false)} />
@@ -44,7 +50,7 @@ const AdminDashboard: React.FC = () => {
         </button>
       )}
 
-      <RestaurantList />
+      <RestaurantList searchTerm={searchTerm} />
     </div>
   );
 };
