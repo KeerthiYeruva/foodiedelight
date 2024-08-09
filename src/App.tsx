@@ -1,18 +1,14 @@
 import React from "react";
-import AdminDashboard from "./pages/AdminDashboard";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import ErrorBoundary from "./components/ErrorBoundary";
-import Navbar from "./components/Navbar";
+import AppRouter from "./AppRouter"; // Import the new AppRouter
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <RestaurantProvider>
         <ErrorBoundary>
-          <Navbar />
-          <div className="container mx-auto p-4 max-w-6xl">
-            <AdminDashboard />
-          </div>
+          <AppRouter />
         </ErrorBoundary>
       </RestaurantProvider>
     </div>

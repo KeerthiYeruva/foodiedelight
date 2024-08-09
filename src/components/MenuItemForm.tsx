@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { MenuItem } from "../services/mockData";
+import React, { useState, useEffect } from "react";
 
 interface MenuItemFormProps {
-  existingMenuItem?: MenuItem;
   onSubmit: (menuItem: MenuItem) => void;
   onCancel?: () => void;
+  existingMenuItem?: MenuItem;
 }
 
 const MenuItemForm: React.FC<MenuItemFormProps> = ({
-  existingMenuItem,
   onSubmit,
   onCancel,
+  existingMenuItem,
 }) => {
   const [name, setName] = useState(existingMenuItem?.name || "");
   const [price, setPrice] = useState(existingMenuItem?.price || 0);
@@ -18,11 +17,19 @@ const MenuItemForm: React.FC<MenuItemFormProps> = ({
     existingMenuItem?.description || ""
   );
 
+  useEffect(() => {
+    if (existingMenuItem) {
+      setName(existingMenuItem.name);
+      setPrice(existingMenuItem.price);
+      setDescription(existingMenuItem.description);
+    }
+  }, [existingMenuItem]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const menuItem: MenuItem = {
-      id: existingMenuItem?.id || 0,
+      id: existingMenuItem?.id || Date.now(),
       name,
       price,
       description,
@@ -32,14 +39,9 @@ const MenuItemForm: React.FC<MenuItemFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit}>
       <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Menu Item Name:
-        </label>
+        <label htmlFor="name">Menu Item Name:</label>
         <input
           type="text"
           id="name"
@@ -47,17 +49,11 @@ const MenuItemForm: React.FC<MenuItemFormProps> = ({
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter item name"
           required
-          className="mt-1 block w-full p-2 border border-gray-300 rounded"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="price"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Price:
-        </label>
+        <label htmlFor="price">Price:</label>
         <input
           type="number"
           id="price"
@@ -67,44 +63,26 @@ const MenuItemForm: React.FC<MenuItemFormProps> = ({
           required
           min="0"
           step="0.01"
-          className="mt-1 block w-full p-2 border border-gray-300 rounded"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Description:
-        </label>
+        <label htmlFor="description">Description:</label>
         <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter item description"
           required
-          className="mt-1 block w-full p-2 border border-gray-300 rounded"
         />
       </div>
 
-      <div className="flex space-x-4">
-        <button
-          type="submit"
-          className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Submit
+      <button type="submit">Submit</button>
+      {onCancel && (
+        <button type="button" onClick={onCancel}>
+          Cancel
         </button>
-        {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="bg-gray-600 text-white p-2 rounded hover:bg-gray-700"
-          >
-            Cancel
-          </button>
-        )}
-      </div>
+      )}
     </form>
   );
 };

@@ -1,19 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RestaurantList from "../components/RestaurantList";
-import RestaurantForm from "../components/RestaurantForm";
-import MenuItemForm from "../components/MenuItemForm";
-import { MenuItem } from "../services/mockData";
 import SearchBar from "../components/SearchBar";
 
 const AdminDashboard: React.FC = () => {
-  const [isAddingRestaurant, setIsAddingRestaurant] = useState(false);
-  const [isAddingMenuItem, setIsAddingMenuItem] = useState(false);
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-
-  const handleMenuItemSubmit = (menuItem: MenuItem) => {
-    console.log("Menu Item Submitted:", menuItem);
-    setIsAddingMenuItem(false);
-  };
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -26,30 +18,18 @@ const AdminDashboard: React.FC = () => {
       <SearchBar onSearch={handleSearch} />
 
       <div className="flex space-x-4">
-        {isAddingRestaurant ? (
-          <RestaurantForm onSubmit={() => setIsAddingRestaurant(false)} />
-        ) : (
-          <button
-            onClick={() => setIsAddingRestaurant(true)}
-            className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
-          >
-            Add New Restaurant
-          </button>
-        )}
-
-        {isAddingMenuItem ? (
-          <MenuItemForm
-            onSubmit={handleMenuItemSubmit}
-            onCancel={() => setIsAddingMenuItem(false)}
-          />
-        ) : (
-          <button
-            onClick={() => setIsAddingMenuItem(true)}
-            className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
-          >
-            Add New Menu Item
-          </button>
-        )}
+        <button
+          onClick={() => navigate("/add-restaurant")}
+          className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
+        >
+          Add New Restaurant
+        </button>
+        <button
+          onClick={() => navigate("/add-menu-item")}
+          className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
+        >
+          Add New Menu Item
+        </button>
       </div>
 
       <RestaurantList searchTerm={searchTerm} />

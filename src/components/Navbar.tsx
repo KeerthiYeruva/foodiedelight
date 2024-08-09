@@ -9,13 +9,13 @@ const Navbar: React.FC = () => (
       </Link>
       <div className="flex space-x-4">
         <Link
-          to="/add"
+          to="/add-restaurant"
           className="bg-white text-blue-700 font-semibold py-2 px-4 rounded hover:bg-blue-600 hover:text-white transition"
         >
           Add Restaurant
         </Link>
         <Link
-          to="/menu"
+          to="/manage-menu"
           className="bg-white text-blue-700 font-semibold py-2 px-4 rounded hover:bg-blue-600 hover:text-white transition"
         >
           Manage Menu

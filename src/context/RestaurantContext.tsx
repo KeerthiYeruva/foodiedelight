@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { Restaurant } from "../services/mockData";
+
 import {
   getRestaurants,
   addRestaurant,

@@ -1,4 +1,4 @@
-import { Restaurant, mockRestaurants } from "./mockData";
+import { mockRestaurants } from "./mockData";
 
 let restaurants: Restaurant[] = [...mockRestaurants];
 

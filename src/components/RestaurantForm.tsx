@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Restaurant } from "../services/mockData";
+
 import { useRestaurants } from "../context/RestaurantContext";
 
 const RestaurantForm: React.FC<{
